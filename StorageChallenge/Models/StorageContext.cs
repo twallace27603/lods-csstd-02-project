@@ -90,12 +90,11 @@ namespace CSSTDSolution.Models
     public class StorageContext : IStorageContext
     {
  
-        public StorageContext(string connectionString)
+        public StorageContext(string storageAccount, string storageKey)
         {
-            this.ConnectionString = connectionString;
+            
         }
 
-        public string ConnectionString { get; set; }
 
         public  List<BlobFileData> GetFileList(string containerName, bool isPrivate)
         {

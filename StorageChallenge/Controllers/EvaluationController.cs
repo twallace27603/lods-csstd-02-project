@@ -2,6 +2,7 @@
 using CSSTDSolution.Models;
 using CSSTDModels;
 using CSSTDEvaluation;
+using System.Configuration;
 
 namespace CSSTDSolution.Controllers
 {
@@ -12,94 +13,113 @@ namespace CSSTDSolution.Controllers
 
         [Route("publicupload")]
         [HttpGet]
-        public EvaluationResult<BlobFileData> PublicBlobUploadTest(string connectionString)
+        public EvaluationResult<BlobFileData> PublicBlobUploadTest(string storageAccount, string storageKey, string encryptionKey)
         {
-            return new BlobEvaluationProcessor(baseFolder).PublicBlobUpload(new StorageContext(connectionString));
+            storageAccount = storageAccount == "-1" ? ConfigurationManager.AppSettings["storageAccount"] : storageAccount;
+            storageKey = storageKey == "-1" ? ConfigurationManager.AppSettings["storageKey"] : storageKey;
+            return new BlobEvaluationProcessor(baseFolder, encryptionKey).PublicBlobUpload(new StorageContext(storageAccount, storageKey));
         }
 
         [Route("publicdownload")]
         [HttpGet]
-        public EvaluationResult<BlobFileData> PublicBlobDownloadTest(string connectionString)
+        public EvaluationResult<BlobFileData> PublicBlobDownloadTest(string storageAccount, string storageKey, string encryptionKey)
         {
-            return new BlobEvaluationProcessor(baseFolder).PublicBlobDownload(new StorageContext(connectionString));
+            storageAccount = storageAccount == "-1" ? ConfigurationManager.AppSettings["storageAccount"] : storageAccount;
+            storageKey = storageKey == "-1" ? ConfigurationManager.AppSettings["storageKey"] : storageKey;
+            return new BlobEvaluationProcessor(baseFolder, encryptionKey).PublicBlobDownload(new StorageContext(storageAccount, storageKey));
         }
 
         [Route("privateupload")]
         [HttpGet]
-        public EvaluationResult<BlobFileData> PrivateBlobUploadTest(string connectionString)
+        public EvaluationResult<BlobFileData> PrivateBlobUploadTest(string storageAccount, string storageKey, string encryptionKey)
         {
-            return new BlobEvaluationProcessor(baseFolder).PrivateBlobUpload(new StorageContext(connectionString));
+            storageAccount = storageAccount == "-1" ? ConfigurationManager.AppSettings["storageAccount"] : storageAccount;
+            storageKey = storageKey == "-1" ? ConfigurationManager.AppSettings["storageKey"] : storageKey;
+            return new BlobEvaluationProcessor(baseFolder, encryptionKey).PrivateBlobUpload(new StorageContext(storageAccount, storageKey));
         }
 
         [Route("privatedownload")]
         [HttpGet]
-        public EvaluationResult<BlobFileData> PrivateBlobDownloadTest(string connectionString)
+        public EvaluationResult<BlobFileData> PrivateBlobDownloadTest(string storageAccount, string storageKey, string encryptionKey)
         {
-            return new BlobEvaluationProcessor(baseFolder).PrivateBlobDownload(new StorageContext(connectionString));
+            storageAccount = storageAccount == "-1" ? ConfigurationManager.AppSettings["storageAccount"] : storageAccount;
+            storageKey = storageKey == "-1" ? ConfigurationManager.AppSettings["storageKey"] : storageKey;
+            return new BlobEvaluationProcessor(baseFolder, encryptionKey).PrivateBlobDownload(new StorageContext(storageAccount, storageKey));
 
         }
 
         [Route("privatesas")]
         [HttpGet]
-        public EvaluationResult<string> PrivateBlobSASTest(string connectionString)
+        public EvaluationResult<string> PrivateBlobSASTest(string storageAccount, string storageKey, string encryptionKey)
         {
-            return new BlobEvaluationProcessor(baseFolder).PrivateContainerSAS(new StorageContext(connectionString));
+            storageAccount = storageAccount == "-1" ? ConfigurationManager.AppSettings["storageAccount"] : storageAccount;
+            storageKey = storageKey == "-1" ? ConfigurationManager.AppSettings["storageKey"] : storageKey;
+            return new BlobEvaluationProcessor(baseFolder, encryptionKey).PrivateContainerSAS(new StorageContext(storageAccount, storageKey));
         }
 
         [Route("sqlupload")]
         [HttpGet]
-        public EvaluationResult<CustomerData> SQLServerUploadTest(string connectionString)
+        public EvaluationResult<CustomerData> SQLServerUploadTest(string connectionString, string encryptionKey)
         {
-            return new RelationalEvaluationProcessor(baseFolder).SQLServerUpload(new SQLServerContext(connectionString));
+            connectionString = connectionString == "-1" ? ConfigurationManager.AppSettings["SQLConnection"] : connectionString;
+            return new RelationalEvaluationProcessor(baseFolder, encryptionKey).SQLServerUpload(new SQLServerContext(connectionString));
         }
 
         [Route("sqldownload")]
         [HttpGet]
-        public EvaluationResult<CustomerData> SQLServerDownloadTest(string connectionString)
+        public EvaluationResult<CustomerData> SQLServerDownloadTest(string connectionString, string encryptionKey)
         {
-            return new RelationalEvaluationProcessor(baseFolder).SQLServerDownload(new SQLServerContext(connectionString));
+            connectionString = connectionString == "-1" ? ConfigurationManager.AppSettings["SQLConnection"] : connectionString;
+            return new RelationalEvaluationProcessor(baseFolder, encryptionKey).SQLServerDownload(new SQLServerContext(connectionString));
         }
 
         [Route("mysqlupload")]
         [HttpGet]
-        public EvaluationResult<VendorData> MySQLUploadTest(string connectionString)
+        public EvaluationResult<VendorData> MySQLUploadTest(string connectionString, string encryptionKey)
         {
-            return new RelationalEvaluationProcessor(baseFolder).MySQLUpload(new MySQLContext(connectionString));
+            connectionString = connectionString == "-1" ? ConfigurationManager.AppSettings["MySQLConnection"] : connectionString;
+            return new RelationalEvaluationProcessor(baseFolder, encryptionKey).MySQLUpload(new MySQLContext(connectionString));
         }
 
         [Route("mysqldownload")]
         [HttpGet]
-        public EvaluationResult<VendorData> MySQLDownloadTest(string connectionString)
+        public EvaluationResult<VendorData> MySQLDownloadTest(string connectionString, string encryptionKey)
         {
-            return new RelationalEvaluationProcessor(baseFolder).MySQLDownload(new MySQLContext(connectionString));
+            connectionString = connectionString == "-1" ? ConfigurationManager.AppSettings["MySQLConnection"] : connectionString;
+            return new RelationalEvaluationProcessor(baseFolder, encryptionKey).MySQLDownload(new MySQLContext(connectionString));
         }
 
-        [Route("cosmosupload")]
+        [Route("cosmossqlupload")]
         [HttpGet]
-        public EvaluationResult<ProductDocument> CosmosDBUploadTest(string connectionString)
+        public EvaluationResult<ProductDocument> CosmosDBSQLUploadTest(string connectionString, string encryptionKey)
         {
-            return new NoSQLEvaluationProcessor(baseFolder).CosmosDBUpload(new CosmosDBContext(connectionString));
+            connectionString = connectionString == "-1" ? ConfigurationManager.AppSettings["CosmosDBSQLConnection"] : connectionString;
+            return new NoSQLEvaluationProcessor(baseFolder, encryptionKey).CosmosDBSQLUpload(new CosmosDBSQLContext(connectionString));
         }
 
-        [Route("cosmosdownload")]
+        [Route("cosmossqldownload")]
         [HttpGet]
-        public EvaluationResult<ProductDocument> CosmosDBDownloadTest(string connectionString)
+        public EvaluationResult<ProductDocument> CosmosDBSQLDownloadTest(string connectionString, string encryptionKey)
         {
-            return new NoSQLEvaluationProcessor(baseFolder).CosmosDBDownload(new CosmosDBContext(connectionString));
+            connectionString = connectionString == "-1" ? ConfigurationManager.AppSettings["CosmosDBSQLConnection"] : connectionString;
+            return new NoSQLEvaluationProcessor(baseFolder, encryptionKey).CosmosDBSQLDownload(new CosmosDBSQLContext(connectionString));
         }
 
-        [Route("searchindex")]
+        [Route("cosmostableupload")]
         [HttpGet]
-        public EvaluationResult<ProductDocument> SearchIndexTest(string connectionString)
+        public EvaluationResult<ProductDocument> CosmosDBTableUploadTest(string connectionString, string encryptionKey)
         {
-            return new NoSQLEvaluationProcessor(baseFolder).SearchIndex(new SearchContext(connectionString));
+            connectionString = connectionString == "-1" ? ConfigurationManager.AppSettings["CosmosDBTableConnection"] : connectionString;
+            return new NoSQLEvaluationProcessor(baseFolder, encryptionKey).CosmosDBSQLUpload(new CosmosDBSQLContext(connectionString));
         }
 
-        [Route("searchdownload")]
+        [Route("cosmostabledownload")]
         [HttpGet]
-        public EvaluationResult<ProductDocument> SearchDownloadTest(string connectionString)
+        public EvaluationResult<ProductDocument> CosmosDBTableDownloadTest(string connectionString, string encryptionKey)
         {
-            return new NoSQLEvaluationProcessor(baseFolder).SearchDownload(new SearchContext(connectionString));
+            connectionString = connectionString == "-1" ? ConfigurationManager.AppSettings["CosmosDBTableConnection"] : connectionString;
+            return new NoSQLEvaluationProcessor(baseFolder, encryptionKey).CosmosDBSQLDownload(new CosmosDBSQLContext(connectionString));
         }
+
     }
 }

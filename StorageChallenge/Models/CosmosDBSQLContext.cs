@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using CSSTDEvaluation;
 using CSSTDModels;
+
+
 
 #region "Data structures"
 /*
@@ -34,21 +37,31 @@ using CSSTDModels;
 
 namespace CSSTDSolution.Models
 {
-    public class SearchContext : ISearchContext
+    public class CosmosDBSQLContext : ICosmosDBSQLContext
     {
-        public SearchContext(string connectionString)
+        public CosmosDBSQLContext(string connectionString)
         {
             this.ConnectionString = connectionString;
         }
 
         public string ConnectionString { get; set; }
 
-        public void CreateIndex()
+        public async Task CreateCollection()
         {
             throw new NotImplementedException();
         }
 
-        public List<ProductDocument> GetDocuments(string Industry)
+        public List<ProductDocument> GetDocuments()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<ProductDocument> GetDocuments(string industry)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UploadDocuments(List<ProductDocument> documents)
         {
             throw new NotImplementedException();
         }

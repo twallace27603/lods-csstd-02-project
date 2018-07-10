@@ -172,9 +172,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\CosmosDBContext.cs" />
+    <Compile Include="Models\CosmosDBSQLContext.cs" />
+    <Compile Include="Models\CosmosDBTableContext.cs" />
     <Compile Include="Models\MySQLContext.cs" />
-    <Compile Include="Models\SearchContext.cs" />
     <Compile Include="Models\SQLServerContext.cs" />
     <Compile Include="Models\StorageContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

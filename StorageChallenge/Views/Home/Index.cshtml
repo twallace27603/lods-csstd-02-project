@@ -13,11 +13,13 @@
         bool advanced = ViewBag.Advanced.ToString().ToLower() == "true";
         if (advanced)
         {
-            <input type="hidden" name="storageConnection" value="@ViewBag.StorageConnection" />
+            <input type="hidden" name="storageAccount" value="@ViewBag.storageAccount" />
+            <input type="hidden" name="storageKey" value="@ViewBag.storageKey" />
             <input type="hidden" name="sqlConnection" value="@ViewBag.SQLConnection" />
             <input type="hidden" name="mysqlConnection" value="@ViewBag.MySQLConnection" />
-            <input type="hidden" name="cosmosdbConnection" value="@ViewBag.CosmosDBConnection" />
-            <input type="hidden" name="searchConnection" value="@ViewBag.SearchConnection" />
+            <input type="hidden" name="cosmosdbSQLConnection" value="@ViewBag.CosmosDBSQLConnection" />
+            <input type="hidden" name="cosmosdbTableConnection" value="@ViewBag.CosmosDBTableConnection" />
+
         }
     }
     <input type="hidden" id="testType" value="@testType" />
@@ -25,23 +27,29 @@
     @if ((testType & 3) > 0)
     {
         <div class="col-md-4">
-            <h2>Stoage Accounts</h2>
+            <h2>Storage Accounts</h2>
             <p>Test your code to upload and download files from a storage account.</p>
             @if (advanced)
             {
                 <p>Set the following app settings in the web.config file:</p>
                 <ul>
-                    <li>StorageConnection</li>
+                    <li>storageAccount</li>
+                    <li>storageKey</li>
                 </ul>
                 <p>Refresh this page then click the Test button to verify your results.</p>
             }
             else
             {
-                <p>Enter the connection string for your storage account here:</p>
+                <p>Enter the account name and access key for your storage account here:</p>
                 <div class="form-group">
-                    <label for="storageConnection">Storage Account</label>
-                    <input type="text" class="form-control" id="storageConnection" />
+                    <label for="storageAccount">Storage Account Name</label>
+                    <input type="text" class="form-control" id="storageAccount" />
                 </div>
+                <div class="form-group">
+                    <label for="storageKey">Storage Account Key</label>
+                    <input type="text" class="form-control" id="storageKey" />
+                </div>
+
             }
             <button id="storageTest">Test</button>
         </div>
@@ -49,7 +57,7 @@
     @if ((testType & 12) > 0)
     {
 
-        <div class="col-md-4" >
+        <div class="col-md-4">
             <h2>Relational Databases</h2>
             <p>Test your code to read and write relational data.</p>
             @if (advanced)
@@ -95,33 +103,36 @@
             <p>Test your code to work with non-relational data</p>
             @if (advanced)
             {
-                <p>Set the following connection string(s) in the web.config file:</p>
+                <p>Set the following app settings in the web.config file:</p>
                 <ul>
                     @if ((testType & 16) == 16)
                     {
-                        <li>CosmosDBConnection</li>}
+                        <li>CosmosDBSQLConnection</li>
+                    }
                     @if ((testType & 32) == 32)
                     {
-                        <li>SearchConnection</li>}
+                        <li>CosmosDBTableConnection</li>
+                    }
                 </ul>
                 <p>Refresh this page then click the Test button to verify your results.</p>
             }
             else
             {
-                <p>Enter the connection string(s) for your relational data here:</p>
-                if ((testType & 4) == 4)
+                <p>Enter the connection string(s) for your No-SQL data here:</p>
+                if ((testType & 16) == 16)
                 {
                     <div class="form-group">
-                        <label for="cosmosdbConnection">Cosmos DB connection string</label>
-                        <input type="text" class="form-control" id="cosmosdbConnection" />
+                        <label for="cosmosdbSQLConnection">Cosmos DB SQL API connection string</label>
+                        <input type="text" class="form-control" id="cosmosdbSQLConnection" />
                     </div>
                 }
-                if ((testType & 8) == 8)
+                if ((testType & 32) == 32)
                 {
                     <div class="form-group">
-                        <label for="searchConnection">Search connection string</label>
-                        <input type="text" class="form-control" id="searchConnection" />
+                        <label for="cosmosdbTableConnection">Cosmos DB Table API connection string</label>
+                        <input type="text" class="form-control" id="cosmosdbTableConnection" />
                     </div>
+
                 }
             }
             <button id="nosqlTest">Test</button>
@@ -131,13 +142,12 @@
 </div>
 <div class="container">
     <div class="col-md-5">
-        <table class="table table-striped"  id="results"></table>
+        <table class="table table-striped" id="results"></table>
     </div>
-    <div class="col-md-offset-2 col-md-5" id="details">
-            <h2>Something</h2>
+    <div class="col-md-5 col-md-offset-1">
+        <div id="details"></div>
     </div>
 </div>
-
 @section scripts {
     <script src="~/Scripts/TestScript.js"></script>
 }

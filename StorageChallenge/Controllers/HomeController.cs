@@ -13,15 +13,18 @@ namespace CSSTDSolution.Controllers
         {
             var testType = int.Parse(ConfigurationManager.AppSettings["TestType"]);
             var advanced = (testType == 3) || (testType == 12) || (testType > 32);
+            //For testing
+            advanced = false;
             ViewBag.TestType = testType;
             ViewBag.Advanced = advanced;
-            if(advanced)
+            if (advanced)
             {
-                ViewBag.StorageConnection = ConfigurationManager.AppSettings["StorageConnection"];
+                ViewBag.StorageAccount = ConfigurationManager.AppSettings["StorageAccount"];
+                ViewBag.StorageKey = ConfigurationManager.AppSettings["StorageKey"];
                 ViewBag.SQLConnection = ConfigurationManager.AppSettings["SQLConnection"];
                 ViewBag.MySQLConnection = ConfigurationManager.AppSettings["MySQLConnection"];
-                ViewBag.CosmosDBConnection = ConfigurationManager.AppSettings["CosmosDBConnection"];
-                ViewBag.SearchConnection = ConfigurationManager.AppSettings["SearchConnection"];
+                ViewBag.CosmosDBSQLConnection = ConfigurationManager.AppSettings["CosmosDBSQLConnection"];
+                ViewBag.CosmosDBTableConnection = ConfigurationManager.AppSettings["CosmosDBTableConnection"];
 
             }
         }

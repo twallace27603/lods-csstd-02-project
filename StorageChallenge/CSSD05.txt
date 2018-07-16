@@ -1,0 +1,7 @@
+﻿In this challenge you will use the following files:
+- Models/StorageContext.cs: You will add code to this file to interact with a private blob storage container.
+- web.config: You will set the testType app setting to 2 in this file.
+
+You will reference the following objects in your code:
+- CSSTDModels.IStorageContext: You will implement this interface for the StorageContext class.
+- CSSTDModels.BlobFileData: This class is used by the evaluation engine.  BlobFileData objects will be passed into and out of methods you implement by this class.

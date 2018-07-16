@@ -5,40 +5,6 @@ using System.Web;
 using CSSTDEvaluation;
 using CSSTDModels;
 
-#region "Guided Public Storage Challenge Instructions"
-/*
- * 1. The storage account connection string is passed in via the class constructor and assigned to the ConnectionString property.
- * 2. Implement the constructor to initialize a private variable of type CloudBlobClient to be used by all other methods
- * 3. Implement the UploadFile method to:
- *      a. Ensure that a container named by the containerName parameter exists and is set to public blob access
- *      b. Upload the file represented by the fileData parameter to the container named by the containerName parameter
- * 4. Implement the GetFileList method to:
- *      a. Retrieve the URLs of the files in the container named by the containerName parameter
- *      b. Populate a List<BlobData> object with the name and URL of each file in the container
- *      c. Return the List<BlobData>
- * 
- * */
-#endregion
-
-#region "Guided Private Storage Challenge Instructions"
-/*
- * 1. The storage account connection string is passed in via the class constructor and assigned to the ConnectionString property.
- * 2. Implement the constructor to initialize a private variable of type CloudBlobClient to be used by all other methods
- * 3. Implement the UploadFile method to:
- *      a. Ensure that a container named by the containerName parameter exists and is set to private blob access
- *      b. Upload the file represented by the fileData parameter to the container named by the containerName parameter
- * 4. Implement the GetSAS method to:
- *      a. Generate a SAS token for the specified container.  The token should support read operations for at least 24 hours.
- *      b. Return the SAS token
- * 5. Implement the GetFileList method to:
- *      a. Retrieve the URLs of the files in the container named by the containerName parameter
- *      b. Call the GetSAS method to generate a SAS token
- *      c. Populate a List<BlobData> object with the name and URL of each file in the container.  The URL must contain the SAS token.
- *      d. Return the List<BlobData> object
- * 
- * */
-#endregion
-
 #region "Advanced/Expert Storage Instructions"
 /*
  * 1. The storage account connection string is passed in via the class constructor and assigned to the ConnectionString property.
@@ -95,8 +61,7 @@ namespace CSSTDSolution.Models
             
         }
 
-
-        public  List<BlobFileData> GetFileList(string containerName, bool isPrivate)
+        public  void UploadFile(string containerName, BlobFileData fileData, bool isPrivate)
         {
             throw new NotImplementedException();
         }
@@ -106,9 +71,10 @@ namespace CSSTDSolution.Models
             throw new NotImplementedException();
         }
 
-        public  void UploadFile(string containerName, BlobFileData fileData, bool isPrivate)
+        public  List<BlobFileData> GetFileList(string containerName, bool isPrivate)
         {
             throw new NotImplementedException();
         }
+
     }
 }

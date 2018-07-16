@@ -184,6 +184,12 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="CSSD08.txt" />
+    <Content Include="CSSD07.txt" />
+    <Content Include="CSSD04.txt" />
+    <Content Include="CSSD05.txt" />
+    <Content Include="CSSD02.txt" />
+    <Content Include="CSSD01.txt" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

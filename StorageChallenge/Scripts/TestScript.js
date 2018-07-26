@@ -92,7 +92,7 @@
         if (showData) {
             var details = "<h2>" + title + "</h2><h3>Links</h3><ul class='list-inline'>";
             $(resultsData.Results).each(function (index, blobData) {
-                details += "<li><img src='" + blobData.URL + "' heigh='200px' width='200px' /></li>";
+                details += "<li><img src='" + blobData.URL + blobData.SAS + "' heigh='200px' width='200px' /></li>";
             });
             details += "</ul>";
             $('#details').append(details);

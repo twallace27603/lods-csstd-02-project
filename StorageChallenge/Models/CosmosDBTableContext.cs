@@ -16,17 +16,17 @@ namespace CSSTDSolution.Models
             throw new NotImplementedException();
         }
 
-        public List<ProductMention> GetMentions()
+        public List<IProductMention> GetMentions()
         {
             throw new NotImplementedException();
         }
 
-        public List<ProductMention> GetMentions(string product, string platform)
+        public List<IProductMention> GetMentions(string product, string platform)
         {
             throw new NotImplementedException();
         }
 
-        public Task LoadMentions(List<ProductMention> mentions)
+        public Task LoadMentions(List<IProductMention> mentions)
         {
             throw new NotImplementedException();
         }

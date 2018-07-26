@@ -17,9 +17,10 @@
             <input type="hidden" name="storageKey" value="@ViewBag.storageKey" />
             <input type="hidden" name="sqlConnection" value="@ViewBag.SQLConnection" />
             <input type="hidden" name="mysqlConnection" value="@ViewBag.MySQLConnection" />
-            <input type="hidden" name="cosmosdbSQLConnection" value="@ViewBag.CosmosDBSQLConnection" />
-            <input type="hidden" name="cosmosdbTableConnection" value="@ViewBag.CosmosDBTableConnection" />
-
+            <input type="hidden" name="cosmosdbSQLUri" value="@ViewBag.cosmosdbSQLUri" />
+            <input type="hidden" name="cosmosdbSQLKey" value="@ViewBag.CosmosDBSQLKey" />
+            <input type="hidden" name="cosmosdbTableAccount" value="@ViewBag.CosmosDBTableAccount" />
+            <input type="hidden" name="cosmosdbTableKey" value="@ViewBag.CosmosDBTableKey" />
         }
     }
     <input type="hidden" id="testType" value="@testType" />
@@ -107,30 +108,43 @@
                 <ul>
                     @if ((testType & 16) == 16)
                     {
-                        <li>CosmosDBSQLConnection</li>
+                        <li>cosmosdbSQLUri</li>
+                        <li>CosmosDBSQLKey</li>
+
                     }
                     @if ((testType & 32) == 32)
                     {
-                        <li>CosmosDBTableConnection</li>
+                        <li>CosmosDBTableAccount</li>
+                        <li>CosmosDBTableKey</li>
+
                     }
                 </ul>
                 <p>Refresh this page then click the Test button to verify your results.</p>
             }
             else
             {
-                <p>Enter the connection string(s) for your No-SQL data here:</p>
+                <p>Enter the account name and key for your No-SQL data here:</p>
                 if ((testType & 16) == 16)
                 {
                     <div class="form-group">
-                        <label for="cosmosdbSQLConnection">Cosmos DB SQL API connection string</label>
-                        <input type="text" class="form-control" id="cosmosdbSQLConnection" />
+                        <label for="cosmosdbSQLUri">Cosmos DB SQL API account URI</label>
+                        <input type="text" class="form-control" id="cosmosdbSQLUri" />
                     </div>
+                    <div class="form-group">
+                        <label for="cosmosdbSQLKey">Cosmos DB SQL API account key</label>
+                        <input type="text" class="form-control" id="cosmosdbSQLKey" />
+                    </div>
+
                 }
                 if ((testType & 32) == 32)
                 {
                     <div class="form-group">
-                        <label for="cosmosdbTableConnection">Cosmos DB Table API connection string</label>
-                        <input type="text" class="form-control" id="cosmosdbTableConnection" />
+                        <label for="cosmosdbTableAccount">Cosmos DB Table API account name</label>
+                        <input type="text" class="form-control" id="cosmosdbTableAccount" />
+                    </div>
+                    <div class="form-group">
+                        <label for="cosmosdbTableKey">Cosmos DB Table API account key</label>
+                        <input type="text" class="form-control" id="cosmosdbTableKey" />
                     </div>
 
                 }

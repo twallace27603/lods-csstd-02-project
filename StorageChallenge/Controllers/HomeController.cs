@@ -12,10 +12,9 @@ namespace CSSTDSolution.Controllers
         public HomeController(): base()
         {
             var testType = int.Parse(ConfigurationManager.AppSettings["TestType"]);
-            var advanced = (testType == 3) || (testType == 12) || (testType > 32);
+            var advanced = (testType < 255) && ((testType == 3) || (testType == 12) || (testType > 32));
             //For testing
-            advanced = false;
-            ViewBag.TestType = testType;
+             ViewBag.TestType = testType;
             ViewBag.Advanced = advanced;
             if (advanced)
             {
@@ -23,8 +22,10 @@ namespace CSSTDSolution.Controllers
                 ViewBag.StorageKey = ConfigurationManager.AppSettings["StorageKey"];
                 ViewBag.SQLConnection = ConfigurationManager.AppSettings["SQLConnection"];
                 ViewBag.MySQLConnection = ConfigurationManager.AppSettings["MySQLConnection"];
-                ViewBag.CosmosDBSQLConnection = ConfigurationManager.AppSettings["CosmosDBSQLConnection"];
-                ViewBag.CosmosDBTableConnection = ConfigurationManager.AppSettings["CosmosDBTableConnection"];
+                ViewBag.CosmosDBSQLUri = ConfigurationManager.AppSettings["CosmosDBSQLUri"];
+                ViewBag.CosmosDBSQLKey = ConfigurationManager.AppSettings["CosmosDBSQLKey"];
+                ViewBag.CosmosDBTableAccount = ConfigurationManager.AppSettings["CosmosDBTableAccount"];
+                ViewBag.CosmosDBTableKey = ConfigurationManager.AppSettings["CosmosDBTableKey"];
 
             }
         }

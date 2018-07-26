@@ -1,17 +1,21 @@
-﻿using System;
+﻿using CSSTDModels;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
-using CSSTDModels;
 
 namespace CSSTDSolution.Models
 {
     public class CosmosDBTableContext : ICosmosDBTableContext
     {
+        private string tableName = "mentions";
         public string ConnectionString { get; set; }
+        public CosmosDBTableContext(string accountName, string key)
+        {
+        }
 
-        public Task CreateTable()
+
+
+        public void CreateTable()
         {
             throw new NotImplementedException();
         }
@@ -26,9 +30,53 @@ namespace CSSTDSolution.Models
             throw new NotImplementedException();
         }
 
-        public Task LoadMentions(List<IProductMention> mentions)
+        public void LoadMentions(List<IProductMention> mentions)
         {
             throw new NotImplementedException();
         }
     }
+    /*  This class has everything necessary to process a ProductMention in a CosmosDB table
+    public class ProductMention : TableEntity, IProductMention
+    {
+        public ProductMention() { }
+
+        public ProductMention(IProductMention source)
+        {
+            this.MentionID = source.MentionID;
+            this.Product = source.Product;
+            this.Platform = source.Platform;
+            this.Mention = source.Mention;
+            this.MentionedAt = source.MentionedAt;
+        }
+        private string product, platform;
+
+        public string Product
+        {
+            get { return this.product; }
+            set
+            {
+                this.product = value;
+                setPartition();
+            }
+        }
+        public string Platform
+        {
+            get { return this.platform; }
+            set
+            {
+                this.platform = value;
+                setPartition();
+            }
+        }
+
+        private void setPartition()
+        {
+            this.PartitionKey = $"{platform}:{product}";
+        }
+
+        public string MentionedAt { get; set; }
+        public string Mention { get; set; }
+        public string MentionID { get => this.RowKey; set => this.RowKey = value; }
+    }
+    */
 }

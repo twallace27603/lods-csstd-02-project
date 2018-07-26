@@ -91,34 +91,40 @@ namespace CSSTDSolution.Controllers
 
         [Route("cosmossqlupload")]
         [HttpGet]
-        public EvaluationResult<ProductDocument> CosmosDBSQLUploadTest(string connectionString, string encryptionKey)
+        public EvaluationResult<ProductDocument> CosmosDBSQLUploadTest(string uri, string key, string encryptionKey)
         {
-            connectionString = connectionString == "-1" ? ConfigurationManager.AppSettings["CosmosDBSQLConnection"] : connectionString;
-            return new NoSQLEvaluationProcessor(baseFolder, encryptionKey).CosmosDBSQLUpload(new CosmosDBSQLContext(connectionString));
+            uri = uri == "-1" ? ConfigurationManager.AppSettings["cosmosdbSQLUriName"] : uri;
+            key = key == "-1" ? ConfigurationManager.AppSettings["CosmosDBSQLKey"] : key;
+            return new NoSQLEvaluationProcessor(baseFolder, encryptionKey).CosmosDBSQLUpload(new CosmosDBSQLContext(uri, key));
         }
 
         [Route("cosmossqldownload")]
         [HttpGet]
-        public EvaluationResult<ProductDocument> CosmosDBSQLDownloadTest(string connectionString, string encryptionKey)
+        public EvaluationResult<ProductDocument> CosmosDBSQLDownloadTest(string uri, string key, string encryptionKey)
         {
-            connectionString = connectionString == "-1" ? ConfigurationManager.AppSettings["CosmosDBSQLConnection"] : connectionString;
-            return new NoSQLEvaluationProcessor(baseFolder, encryptionKey).CosmosDBSQLDownload(new CosmosDBSQLContext(connectionString));
+            uri = uri == "-1" ? ConfigurationManager.AppSettings["cosmosdbSQLUriName"] : uri;
+            key = key == "-1" ? ConfigurationManager.AppSettings["CosmosDBSQLKey"] : key;
+            return new NoSQLEvaluationProcessor(baseFolder, encryptionKey).CosmosDBSQLDownload(new CosmosDBSQLContext(uri, key));
         }
 
         [Route("cosmostableupload")]
         [HttpGet]
-        public EvaluationResult<ProductDocument> CosmosDBTableUploadTest(string connectionString, string encryptionKey)
+        public EvaluationResult<IProductMention> CosmosDBTableUploadTest(string accountName, string key, string encryptionKey)
         {
-            connectionString = connectionString == "-1" ? ConfigurationManager.AppSettings["CosmosDBTableConnection"] : connectionString;
-            return new NoSQLEvaluationProcessor(baseFolder, encryptionKey).CosmosDBSQLUpload(new CosmosDBSQLContext(connectionString));
+            accountName = accountName == "-1" ? ConfigurationManager.AppSettings["CosmosDBTableAccountName"] : accountName;
+            key = key == "-1" ? ConfigurationManager.AppSettings["CosmosDBTableKey"] : key;
+            return new NoSQLEvaluationProcessor(baseFolder, encryptionKey).CosmosDBTableUpload(new CosmosDBTableContext(accountName, key));
         }
 
         [Route("cosmostabledownload")]
         [HttpGet]
-        public EvaluationResult<ProductDocument> CosmosDBTableDownloadTest(string connectionString, string encryptionKey)
+        public EvaluationResult<IProductMention> CosmosDBTableDownloadTest(string accountName, string key, string encryptionKey)
         {
-            connectionString = connectionString == "-1" ? ConfigurationManager.AppSettings["CosmosDBTableConnection"] : connectionString;
-            return new NoSQLEvaluationProcessor(baseFolder, encryptionKey).CosmosDBSQLDownload(new CosmosDBSQLContext(connectionString));
+
+            accountName = accountName == "-1" ? ConfigurationManager.AppSettings["CosmosDBTableAccountName"] : accountName;
+            key = key == "-1" ? ConfigurationManager.AppSettings["CosmosDBTableKey"] : key;
+            return new NoSQLEvaluationProcessor(baseFolder, encryptionKey).CosmosDBTableDownload(new CosmosDBTableContext(accountName, key));
+
         }
 
     }

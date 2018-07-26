@@ -60,28 +60,28 @@
 
     function nosqlTest() {
         clearResults();
-        var cosmosdbSQLConnection = "connectionString=" + encodeURIComponent($('#cosmosdbSQLConnection').val());
-        var cosmosdbTableConnection = "connectionString=" + encodeURIComponent($('#cosmosdbTableConnection').val());
+        var cosmosdbSQLConnection = "uri=" + encodeURIComponent($('#cosmosdbSQLUri').val()) + "&key=" + encodeURIComponent($('#cosmosdbSQLKey').val());
+        var cosmosdbTableConnection = "accountName=" + encodeURIComponent($('#cosmosdbTableAccount').val()) + "&key=" + encodeURIComponent($('#cosmosdbTableKey').val());
 
         if ((testType & 16) === 16) {
             runTest("cosmossqlupload", cosmosdbSQLConnection, "Cosmos DB SQL Upload", null, null, processCosmosSQLUploadDataResults, false);
 
         }
         if ((testType & 32) === 32) {
-            runTest("cosmostableupload", cosmosdbTableConnection, "Cosmos DB SQL Upload", null, null, processCosmosTableUploadDataResults, false);
+            runTest("cosmostableupload", cosmosdbTableConnection, "Cosmos DB TableL Upload", null, null, processCosmosTableUploadDataResults, false);
         }
     }
     function processCosmosSQLUploadDataResults(resultsData, title, fieldNames, fieldTitles, showData) {
-        var cosmosdbConnection = "connectionString=" + encodeURIComponent($('#cosmosdbSQLConnection').val());
+        var cosmosdbSQLConnection = "uri=" + encodeURIComponent($('#cosmosdbSQLUri').val()) + "&key=" + encodeURIComponent($('#cosmosdbSQLKey').val());
         processDataResults(resultsData, title, fieldNames, fieldTitles, showData);
-        runTest("cosmossqldownload", cosmosdbConnection, "Cosmos DB SQL Download", ["Industry", "Name", "Tier"], ["Industry", "Name", "Tier"], processDataResults, true);
+        runTest("cosmossqldownload", cosmosdbSQLConnection, "Cosmos DB SQL Download", ["Industry", "Name", "Tier"], ["Industry", "Name", "Tier"], processDataResults, true);
 
     }
 
     function processCosmosTableUploadDataResults(resultsData, title, fieldNames, fieldTitles, showData) {
-        var cosmosdbConnection = "connectionString=" + encodeURIComponent($('#cosmosdbTableConnection').val());
+        var cosmosdbTableConnection = "accountName=" + encodeURIComponent($('#cosmosdbTableAccount').val()) + "&key=" + encodeURIComponent($('#cosmosdbTableKey').val());
         processDataResults(resultsData, title, fieldNames, fieldTitles, showData);
-        runTest("cosmostabledownload", cosmosdbConnection, "Cosmos DB Table Download", ["Industry", "Name", "Tier"], ["Industry", "Name", "Tier"], processDataResults, true);
+        runTest("cosmostabledownload", cosmosdbTableConnection, "Cosmos DB Table Download", ["Industry", "Name", "Tier"], ["Industry", "Name", "Tier"], processDataResults, true);
 
     }
 
@@ -123,7 +123,7 @@
     }
     function processError(errorInfo, title) {
         var result = "<tr><td>Error</td><td><h3>" + title + "</h3><p>" + errorInfo + "</p></td></tr>";
-        addResult(result);
+        $('#results').add(result);
     }
     function runTest(operation, queryString, title, fieldNames, fieldTitles, callBack, showData) {
         var url = "/evaluate/" + operation + "?" + queryString + "&encryptionKey=" + encodeURIComponent(key);

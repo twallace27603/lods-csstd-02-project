@@ -39,9 +39,12 @@ namespace CSSTDSolution.Models
 {
     public class CosmosDBSQLContext : ICosmosDBSQLContext
     {
-        public CosmosDBSQLContext(string connectionString)
+        private const string databaseName = "productDB";
+        private const string collectionName = "products";
+
+        public CosmosDBSQLContext(string uri, string key)
         {
-            this.ConnectionString = connectionString;
+
         }
 
         public string ConnectionString { get; set; }

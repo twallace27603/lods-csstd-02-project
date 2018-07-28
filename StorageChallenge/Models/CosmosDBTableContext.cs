@@ -7,7 +7,6 @@ namespace CSSTDSolution.Models
 {
     public class CosmosDBTableContext : ICosmosDBTableContext
     {
-        private string tableName = "mentions";
         public string ConnectionString { get; set; }
         public CosmosDBTableContext(string accountName, string key)
         {
@@ -15,22 +14,22 @@ namespace CSSTDSolution.Models
 
 
 
-        public void CreateTable()
+        public void CreateTable(string tableName)
         {
             throw new NotImplementedException();
         }
 
-        public List<IProductMention> GetMentions()
+        public List<IProductMention> GetMentions(string tableName)
         {
             throw new NotImplementedException();
         }
 
-        public List<IProductMention> GetMentions(string product, string platform)
+        public List<IProductMention> GetMentions(string product, string platform, string tableName)
         {
             throw new NotImplementedException();
         }
 
-        public void LoadMentions(List<IProductMention> mentions)
+        public void LoadMentions(List<IProductMention> mentions, string tableName)
         {
             throw new NotImplementedException();
         }

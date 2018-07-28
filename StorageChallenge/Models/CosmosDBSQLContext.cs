@@ -49,22 +49,22 @@ namespace CSSTDSolution.Models
 
         public string ConnectionString { get; set; }
 
-        public async Task CreateCollection()
+        public async Task CreateCollection(string collectionName)
         {
             throw new NotImplementedException();
         }
 
-        public List<ProductDocument> GetDocuments()
+        public List<ProductDocument> GetDocuments(string collectionName)
         {
             throw new NotImplementedException();
         }
 
-        public List<ProductDocument> GetDocuments(string industry)
+        public List<ProductDocument> GetDocuments(string industry, string collectionName)
         {
             throw new NotImplementedException();
         }
 
-        public Task UploadDocuments(List<ProductDocument> documents)
+        public Task UploadDocuments(List<ProductDocument> documents, string collectionName)
         {
             throw new NotImplementedException();
         }

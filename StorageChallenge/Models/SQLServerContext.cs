@@ -46,17 +46,17 @@ namespace CSSTDSolution.Models
 
         public string ConnectionString { get; set; }
 
-        public void CreateTable()
+        public void CreateTable(string tableName)
         {
             throw new NotImplementedException();
         }
 
-        public List<CustomerData> GetData()
+        public List<CustomerData> GetData(string tableName)
         {
             throw new NotImplementedException();
         }
 
-        public void LoadData(List<CustomerData> customers)
+        public void LoadData(List<CustomerData> customers, string tableName)
         {
             throw new NotImplementedException();
         }

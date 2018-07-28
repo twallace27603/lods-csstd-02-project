@@ -13,14 +13,14 @@
         bool advanced = ViewBag.Advanced.ToString().ToLower() == "true";
         if (advanced)
         {
-            <input type="hidden" name="storageAccount" value="@ViewBag.storageAccount" />
-            <input type="hidden" name="storageKey" value="@ViewBag.storageKey" />
-            <input type="hidden" name="sqlConnection" value="@ViewBag.SQLConnection" />
-            <input type="hidden" name="mysqlConnection" value="@ViewBag.MySQLConnection" />
-            <input type="hidden" name="cosmosdbSQLUri" value="@ViewBag.cosmosdbSQLUri" />
-            <input type="hidden" name="cosmosdbSQLKey" value="@ViewBag.CosmosDBSQLKey" />
-            <input type="hidden" name="cosmosdbTableAccount" value="@ViewBag.CosmosDBTableAccount" />
-            <input type="hidden" name="cosmosdbTableKey" value="@ViewBag.CosmosDBTableKey" />
+            <input type="hidden" id="storageAccount" value="@ViewBag.storageAccount" />
+            <input type="hidden" id="storageKey" value="@ViewBag.storageKey" />
+            <input type="hidden" id="sqlConnection" value="@ViewBag.SQLConnection" />
+            <input type="hidden" id="mysqlConnection" value="@ViewBag.MySQLConnection" />
+            <input type="hidden" id="cosmosdbSQLUri" value="@ViewBag.cosmosdbSQLUri" />
+            <input type="hidden" id="cosmosdbSQLKey" value="@ViewBag.CosmosDBSQLKey" />
+            <input type="hidden" id="cosmosdbTableAccount" value="@ViewBag.CosmosDBTableAccount" />
+            <input type="hidden" id="cosmosdbTableKey" value="@ViewBag.CosmosDBTableKey" />
         }
     }
     <input type="hidden" id="testType" value="@testType" />
